@@ -63,11 +63,7 @@ module.exports = function createComponentBuilder() {
 
       this.contentTypes.set(uid, contentType);
 
-      const defaultConnection = _.get(
-        strapi,
-        ['config', 'currentEnvironment', 'database', 'defaultConnection'],
-        'default'
-      );
+      const defaultConnection = strapi.config.get('database.defaultConnection', 'default');
 
       const defaultCollectionName = `${nameToCollectionName(pluralize(infos.name))}`;
 
