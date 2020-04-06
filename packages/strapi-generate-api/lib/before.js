@@ -4,10 +4,6 @@
  * Module dependencies
  */
 
-// Node.js core.
-const fs = require('fs');
-const path = require('path');
-
 // Public node modules.
 const _ = require('lodash');
 const pluralize = require('pluralize');
@@ -28,7 +24,6 @@ module.exports = (scope, cb) => {
 
   // Format `id`.
   const name = scope.name || nameToSlug(scope.id);
-  const environment = process.env.NODE_ENV || 'development';
 
   scope.contentTypeKind = scope.args.kind || 'collectionType';
 
@@ -123,18 +118,7 @@ module.exports = (scope, cb) => {
 
   // Get default connection
   try {
-    scope.connection = scope.args.connection;
-    if (!scope.args.connection) {
-      try {
-        scope.connection = JSON.parse(
-          fs.readFileSync(
-            path.resolve(scope.rootPath, 'config', 'environments', environment, 'database.json')
-          )
-        ).defaultConnection;
-      } catch (err) {
-        scope.connection = 'default';
-      }
-    }
+    scope.connection = scope.args.connection || undefined;
   } catch (err) {
     return cb.invalid(err);
   }
