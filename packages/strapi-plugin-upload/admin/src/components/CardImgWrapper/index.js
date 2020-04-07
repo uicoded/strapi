@@ -5,7 +5,6 @@ const CardImgWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 0;
-  overflow: hidden;
   padding-top: ${({ small }) => (small ? '62.8%' : '63.8%')};
   margin-bottom: 6px;
   border-radius: 2px;
